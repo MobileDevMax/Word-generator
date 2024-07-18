@@ -1,0 +1,59 @@
+import 'package:flutter/material.dart';
+import 'dart:math';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: WordGenerator(),
+    );
+  }
+}
+
+class WordGenerator extends StatefulWidget {
+  @override
+  _WordGeneratorState createState() => _WordGeneratorState();
+}
+
+class _WordGeneratorState extends State<WordGenerator> {
+  final List<String> _words = [
+    'table','apple', 'cat', 'sky', 'grape', 'business','strong', 'lemon', 'salt', 'rat', 'orange', 'sofa', 'bar', 'google', 'car'
+  ];
+  String _randomWord = '';
+
+  void _generateWord() {
+    final random = Random();
+    setState(() {
+      _randomWord = _words[random.nextInt(_words.length)];
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Word Generator'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              _randomWord,
+              style: TextStyle(fontSize: 24),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _generateWord,
+              child: Text('Generate'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
